@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/spideman.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Codehory's blog" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="来自肥宅的小乐趣，带你玩转hexo自建博客，生活还是需要装一下的嘛：）。#About Hexo官网:https://hexo.io/zh-cn/关于hexo，如官网的一句话介绍, Hexo 是一个快速、简洁且高效的博客框架。  hexo是基于node.js制作的一个博客工具，利用markdown编写文章，hexo生成静态html页面，最后将生成的html上传到我们自己的服务器。  hexo提供了多">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo+github博客搭建与备份教程（详细篇）">
+<meta property="og:url" content="http://yoursite.com/2019/07/25/玩转hexo/hexo+github博客搭建与备份教程（详细篇）/index.html">
+<meta property="og:site_name" content="Codehory&#39;s blog">
+<meta property="og:description" content="来自肥宅的小乐趣，带你玩转hexo自建博客，生活还是需要装一下的嘛：）。#About Hexo官网:https://hexo.io/zh-cn/关于hexo，如官网的一句话介绍, Hexo 是一个快速、简洁且高效的博客框架。  hexo是基于node.js制作的一个博客工具，利用markdown编写文章，hexo生成静态html页面，最后将生成的html上传到我们自己的服务器。  hexo提供了多">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-13T02:03:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo+github博客搭建与备份教程（详细篇）">
+<meta name="twitter:description" content="来自肥宅的小乐趣，带你玩转hexo自建博客，生活还是需要装一下的嘛：）。#About Hexo官网:https://hexo.io/zh-cn/关于hexo，如官网的一句话介绍, Hexo 是一个快速、简洁且高效的博客框架。  hexo是基于node.js制作的一个博客工具，利用markdown编写文章，hexo生成静态html页面，最后将生成的html上传到我们自己的服务器。  hexo提供了多">
+  <link rel="canonical" href="http://yoursite.com/2019/07/25/玩转hexo/hexo+github博客搭建与备份教程（详细篇）/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>hexo+github博客搭建与备份教程（详细篇） | Codehory's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Codehory's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">格物要致知</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/玩转hexo/hexo+github博客搭建与备份教程（详细篇）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Codehory">
+      <meta itemprop="description" content="生活在于折腾">
+      <meta itemprop="image" content="/images/pine.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Codehory's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">hexo+github博客搭建与备份教程（详细篇）
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-25 12:17:56" itemprop="dateCreated datePublished" datetime="2019-07-25T12:17:56+08:00">2019-07-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-13 10:03:24" itemprop="dateModified" datetime="2019-09-13T10:03:24+08:00">2019-09-13</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/玩转hexo/" itemprop="url" rel="index"><span itemprop="name">玩转hexo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>6.2k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>6 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>来自肥宅的小乐趣，带你玩转hexo自建博客，生活还是需要装一下的嘛：）。</p><p>#About Hexo<br><strong>官网</strong>:<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a></p><p>关于hexo，如官网的一句话介绍,</p><blockquote>
+<p><em>Hexo 是一个快速、简洁且高效的博客框架。</em></p>
+</blockquote><ul>
+<li><p><strong>hexo是基于node.js制作的一个博客工具，利用markdown编写文章，hexo生成静态html页面，最后将生成的html上传到我们自己的服务器。</strong></p>
+</li>
+<li><p><strong>hexo提供了多种样式的主题，这也是吸引众多热爱DIY的小伙伴的地方，再也不用拘泥于统一制式了。</strong></p>
+</li>
+</ul><a id="more"></a>
+
+
+
+
+<p>#github+hexo<br>正如上面的介绍，hexo会在本地生成一个静态html页面，为了让别人看到我们的博客，我们就需要将其推到远端–服务器。</p>
+<p>那么github就提供给我们一个免费的仓库，对于新人练手是再好不过了。当然，也可以购买属于自己的域名，让更多的朋友看到你的博客。话不多说，让我们开始吧！（作者使用的是mac os系统，其他系统也类似）</p>
+<hr>
+<p>##环境搭建</p>
+<p>###1.安装node.js<br>mac用户推荐使用<code>Homebrew</code></p>
+<ul>
+<li><p><strong>安装Homebrew</strong><br><a href="[https://brew.sh/](https://brew.sh/)">Homebrew</a>是一款Mac OS平台下的软件包管理工具,类似于ubuntu的<code>apt-get</code>。如没安装的请先安装，打开终端，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装node.js</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install node</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看是否安装成功</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>笔者安装的版本为v12.6.0</p>
+<p>###2.安装Git</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
+
+<p>###3.安装cnpm</p>
+<p>安装hexo需要依赖node.js的<code>npm</code>的包管理器，由于国内镜像源速度很慢，为了避免出错，所以在使用之前一般是利用<code>npm</code>来安装<code>cnpm</code>,<code>cnpm</code>为淘宝的镜像源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry-https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>#hexo博客框架搭建</p>
+<ul>
+<li><p><strong>一切就绪，准备安装hexo</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>检查版本</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo -v</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">- **创建存放博客的文件夹**</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>$ mkdir myblog &amp;&amp; cd myblog</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- **生成博客**</span><br></pre></td></tr></table></figure>
+
+<p>$ hexo init</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">至此，我们hexo的博客搭建初步完成了。**INFO  Start blogging with Hexo!**</span><br><span class="line">- **启动博客**</span><br></pre></td></tr></table></figure>
+
+<p>$ hexo s</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- **在浏览器地址栏处输入：**https://localhost:4000 ，**就可以看到博客的雏形了。(ctrl+C关闭博客)**</span><br><span class="line"></span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-f6c8a6a6c819a520.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line">***</span><br><span class="line">##部署至Github</span><br><span class="line">1. **创建新仓库（没有github账号的请先注册）Creat new repository,</span><br><span class="line">地址填写格式：`username.github.io`,注：&quot;username&quot;必须与你的github账号的ID一致。**</span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-abfa523c159d9c9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line">2.**配置SSH Key**</span><br><span class="line">`SSH Key`被认为是一种更安全的登陆方式，在每次更新博客时无需输入用户名和密码，更加方便、快捷、安全。</span><br><span class="line">- **查看本机是否存在SSH密钥**</span><br><span class="line">打开终端(home目录下)，输入</span><br></pre></td></tr></table></figure>
+
+<p>$ cd .ssh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">若不存在，请进行下一步（存在，请跳过创建步骤） </span><br><span class="line">- **创建SSH Key**</span><br><span class="line">`your_email@example.com`填写你的邮箱地址</span><br></pre></td></tr></table></figure>
+
+<p>$ ssh-keygen -t rsa -C “<a href="mailto:your_email@example.com" target="_blank" rel="noopener">your_email@example.com</a>“</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入后按回车，然后会提示输入密码，可以按回车设为空。之后SSH就生成了，下图所示：</span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-c188e1e2b0167bbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line">3.**在Github中添加密钥**</span><br><span class="line">以文本形式打开`.ssh`中的`id_rsa.pub`文件，复制内容，接着登陆Github，点击右上角头像`Setting-&gt;SSH and GPG keys-&gt;New SSH key-&gt;粘贴Key（Title任意填写）-&gt;Add SSH key` 没问题，Bingo！</span><br><span class="line"></span><br><span class="line">4.**检验SSH Key**</span><br></pre></td></tr></table></figure>
+
+<p>$ ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">执行yes，若出现下例，则表示配置成功。</span><br></pre></td></tr></table></figure>
+
+<p>Hi codehory! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5.**设置用户信息**</span><br></pre></td></tr></table></figure>
+
+<p>$ git config –global user.name “codehory”//自己喜欢的用户名（非github用户名）<br>$ git config –global user.email  “<a href="mailto:codehory@gmail.com" target="_blank" rel="noopener">codehory@gmail.com</a>“//填写自己的邮箱</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6.**本地博客部署至Github**</span><br><span class="line">终端`myblog`目录下，使用`vim`打开`_config.yml`,</span><br></pre></td></tr></table></figure>
+
+<p>$ vim _config.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">滑动至最底部，如图，编辑 `deploy`节点,</span><br><span class="line">`type: git`</span><br><span class="line">`repo: git@github.com:codehory/codehory.github.io.git`</span><br><span class="line">`branch: master`</span><br><span class="line">**注：1.冒号后有空格 2.`repo`一行为新建仓库的SSH地址，打开新建仓库就能看见**</span><br><span class="line"></span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-b85a2d1d9e970075.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-dee4271225a48375.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">输入完毕，按`esc`,`:wq`保存退出。</span><br><span class="line"></span><br><span class="line">7.**安装部署插件**</span><br><span class="line">在`myblog`目录下，</span><br></pre></td></tr></table></figure>
+
+<p>$ cnpm install hexo-deployer-git –save</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8.**Deploy to Github**</span><br></pre></td></tr></table></figure>
+
+<p>$ hexo clean<br>$ hexo g -d</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">至此，恭喜，完成全部部署，在网址栏输入：`yourusername.github.io`就能看到你的初步博客啦！（`yourusername`为你github用户名）</span><br><span class="line">***</span><br><span class="line">##如何写一篇博客</span><br><span class="line">在`myblog`目录下，新建一篇博客，</span><br></pre></td></tr></table></figure>
+
+<p>$ hexo new “my first hexo blog”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在本地博客的`source-&gt;_posts`路径下看到新建的文章，是md格式的，使用markdown文本编辑器进行编辑即可。</span><br><span class="line"></span><br><span class="line">编辑完成之后，执行以下命令，即可更新博文，</span><br></pre></td></tr></table></figure>
+
+<p>$ hexo clean<br>$ hexo g -d</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">***</span><br><span class="line">##更换主题</span><br><span class="line">为了继续满足我们深入骨髓的DIY之心，换一个自己喜欢的主题也是必不可少的环节。Github上有很多眼花缭乱的主题，去选一个自己喜欢的吧！[https://hexo.io/themes/](https://hexo.io/themes/)</span><br><span class="line">本文例程使用的是： [https://github.com/litten/hexo-theme-yilia](https://link.jianshu.com/?t=https://github.com/litten/hexo-theme-yilia)</span><br><span class="line"></span><br><span class="line">- **在`myblog`目录下，下载我们喜欢的主题至`themes`下，**</span><br></pre></td></tr></table></figure>
+
+<p>$ git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- **配置通用文件**</span><br><span class="line"></span><br><span class="line">在`myblog`目录下，用`vim`打开` _config.yml`,</span><br></pre></td></tr></table></figure>
+
+<p>$ vim _config.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">可以修改`title,subtitle,description,keywords,author`等内容，这些属性依赖于你选择的主题。</span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-8cc830e528971dde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line">添加对应的主题，`theme:对应主题名`</span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-e5bd76b503ba7a09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输入完毕，按`esc`,`:wq`保存退出。</span><br><span class="line"></span><br><span class="line">- **配置主题文件**</span><br><span class="line">在`./themes/yilia`目录下,用`vim`打开`_config.yml`文件(这是每个主题对应的配置文件),</span><br></pre></td></tr></table></figure>
+
+<p>$ vim _config.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">`menu`用来设置你博客的分类，标签等。</span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-5d4269f7ac4ce86b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">`subnav`为你的社交媒体的链接，如github，微博等。</span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-11db922dde908f51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line">`打赏`功能可以设置打赏用语&quot;谢谢你请我吃糖果&quot;。`插入图片设置与下面头像设置一并介绍`</span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-3bb5b24f609555f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">**用github当图床**</span><br><span class="line">`头像`更换:在`myblog`目录下的`source`文件下创建`img`文件，将图片保存在其中。我们通过部署生成，把图片放到`github`上，通过链接找到。</span><br><span class="line">例如：本文将一张`timg.jpeg`的图片存放到`myblog/source/img/`下，那么我们可以通过之前生成的链接，如`https://codehory.github.io/img/timg.jpeg`,进行图片的插入。</span><br><span class="line"></span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-34934be9129b838a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">还有许多诸如此类的设置，各自进去修改吧，同样的操作，保存退出。</span><br><span class="line">- **上传更新**</span><br><span class="line">配置完毕，我们需要重新生成博客，并将博客更新到远端。</span><br></pre></td></tr></table></figure>
+
+<p>$ hexo clean<br>$ hexo g -d</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">最后来看看我们的博客吧，还不错吧：</span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-ef08c352a98889cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line">****</span><br><span class="line"></span><br><span class="line">##备份博客</span><br><span class="line">由于博客是在本地生成的，如果更换电脑，那我们是不是就不能用这个博客了？方法总比问题多，我们可以利用`github`来备份博客的文件和数据。</span><br><span class="line">- **创建版本库**</span><br><span class="line">在`myblog`目录下，</span><br></pre></td></tr></table></figure>
+
+<p>$ git init</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- **在Github上新建仓库**</span><br><span class="line">新建一个仓库，将`Repository name`取为`blog.git`</span><br><span class="line">![](https://upload-images.jianshu.io/upload_images/18864827-ea08b1b3ef67b97c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line">- **链接仓库**</span><br><span class="line">链接仓库地址：`git@github.com:yourusername/blog.git`(`yourusername`为你github用户名)</span><br></pre></td></tr></table></figure>
+
+<p>$ git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:codehory/blog.git</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- **添加备份文件**</span><br></pre></td></tr></table></figure>
+
+<p>$ git add source/ themes/ _config.yml scaffolds/ package.json .gitignore</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- **注释备份内容**</span><br></pre></td></tr></table></figure>
+
+<p>$ git commit -m “博客备份”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- **第一次强制上传文件到github仓库**</span><br></pre></td></tr></table></figure>
+
+<p>$ git push -u origin master</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">第一次备份完毕，以后的备份，只需进行如下操作：</span><br></pre></td></tr></table></figure>
+
+<p>$ git push origin master</p>
+<pre><code>这样备份完毕后，我们在另一台电脑上，只需`git clone`一下就行了。
+
+#结语
+***说长不长，说短不短，一通操作下来，不知你是否成功了呢？作者只是抛砖引玉，带你入门，之后的进阶过程，还望各位继续探索，玩转hexo。欢迎在评论区展示下你们的成果咯，让作者也学习学习，哈哈。同样，如若有任何纰漏或者相关问题，请在评论区留言吧！感谢各位观看！See you～***</code></pre>
+    </div>
+
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-envira"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+        
+      
+        <div id="reward-container">
+  <div>如果对您有帮助，请我喝杯汽水吧！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Codehory 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/06/07/环境配置/VS2017配置PCL1-9-1-for-win10(超详细)/" rel="next" title="VS2017配置PCL1-9-1-for-win10(超详细)">
+                  <i class="fa fa-chevron-left"></i> VS2017配置PCL1-9-1-for-win10(超详细)
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/07/27/环境配置/Octomap在windows环境配置(任意版本VS)/" rel="prev" title="Octomap在windows环境配置(任意版本VS)">
+                  Octomap在windows环境配置(任意版本VS) <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/pine.jpeg"
+      alt="Codehory">
+  <p class="site-author-name" itemprop="name">Codehory</p>
+  <div class="site-description" itemprop="description">生活在于折腾</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:codehory@foxmail.com" title="E-Mail &rarr; mailto:codehory@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/codehory" title="Weibo &rarr; https://weibo.com/codehory" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.jianshu.com/u/81a8a41ecfee" title="简书 &rarr; https://www.jianshu.com/u/81a8a41ecfee" rel="noopener" target="_blank"><i class="fa fa-fw fa-bug"></i>简书</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id=“heart”>
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Codehory</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">30k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">27 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

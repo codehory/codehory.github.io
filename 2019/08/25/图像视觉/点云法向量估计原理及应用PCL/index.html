@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/spideman.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Codehory's blog" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="#简述点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！格物要致知：）">
+<meta name="keywords" content="点云,PCL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="点云法向量估计原理及应用PCL">
+<meta property="og:url" content="http://yoursite.com/2019/08/25/图像视觉/点云法向量估计原理及应用PCL/index.html">
+<meta property="og:site_name" content="Codehory&#39;s blog">
+<meta property="og:description" content="#简述点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！格物要致知：）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/08/25/图像视觉/images/background.jpeg">
+<meta property="og:updated_time" content="2019-09-15T06:43:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="点云法向量估计原理及应用PCL">
+<meta name="twitter:description" content="#简述点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！格物要致知：）">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/25/图像视觉/images/background.jpeg">
+  <link rel="canonical" href="http://yoursite.com/2019/08/25/图像视觉/点云法向量估计原理及应用PCL/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>点云法向量估计原理及应用PCL | Codehory's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Codehory's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">格物要致知</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/25/图像视觉/点云法向量估计原理及应用PCL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Codehory">
+      <meta itemprop="description" content="生活在于折腾">
+      <meta itemprop="image" content="/images/pine.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Codehory's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">点云法向量估计原理及应用PCL
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-25 00:31:57" itemprop="dateCreated datePublished" datetime="2019-08-25T00:31:57+08:00">2019-08-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-15 14:43:41" itemprop="dateModified" datetime="2019-09-15T14:43:41+08:00">2019-09-15</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/图像视觉/" itemprop="url" rel="index"><span itemprop="name">图像视觉</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>5k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>5 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <div class="post-gallery-row">
+              <img src="/../images/background.jpeg" itemprop="contentUrl">
+            
+          
+
+          </div>
+        </div>
+        <p>#简述<br>点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。<strong>表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。</strong>在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！<strong>格物要致知：）</strong><br><img src="https://upload-images.jianshu.io/upload_images/18864827-a32315d395f19a5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<a id="more"></a>
+
+
+<p>#原理<br><strong><em>确定表面一点法线的问题近似于估计表面的一个相切面法线的问题，因此转换过来以后就变成一个最小二乘法平面拟合估计问题。</em></strong></p>
+<ul>
+<li><p><strong>平面方程</strong><br>$$cos\alpha·x+cos\beta·y+cos\gamma·z+p=0$$</p>
+<p>$cos\alpha,cos\beta,cos\gamma$为平面上点$(x,y,z)$处法向量的方向余弦，$|p|$为原点到平面的距离。<br>$$<br>ax+by+cz=d(d\geq0),a^{2}+b^{2}+c^{2}=1$$<br>求平面方程即转化为求$a,b,c,d$四个参数。</p>
+</li>
+<li><p><strong>求解过程</strong></p>
+</li>
+</ul>
+<p><strong>1. 待拟合平面点集$(x_i,y_i,z_i),i=1,2,…,n$</strong><br>待拟合的平面方程：$$ax+by+cz=d(d\geq0),a^{2}+b^{2}+c^{2}=1$$<br>任意点到平面的距离：$$d_i=|ax+by+cz-d|$$</p>
+<p><strong>2. 要获得最佳拟合平面，则需要满足：</strong><br>$$e=\sum^n_{i=1} d_i^2\to min$$<br>因此，转化为求解极值的问题，<br>$$f=\sum^n_{i=1} d_i^2\space-\lambda(a^{2}+b^{2}+c^{2}-1)$$</p>
+<p><strong>3. 分别对$d,a,b,c$求偏导</strong><br>$$<br>\frac{\partial f}{\partial d}=-2\sum^n_{i=1} (ax_i+by_i+cz_i-d)=0<br>$$<br>$$<br>d=\frac{\sum ^{n}<em>{i=1}x_i}{n}a+\frac{\sum^{n}</em>{i=1}y_i}{n}b+\frac{\sum^{n}<em>{i=1}z_i}{n}c<br>$$<br>将$d$带入任意点到平面的距离公式：<br>$$<br>\begin{equation}\begin{split}<br>d_i&amp;=|a(x_i-\frac{\sum ^{n}</em>{i=1}x_i}{n})+b(y_i-\frac{\sum ^{n}<em>{i=1}y_i}{n})+c(z_i-\frac{\sum ^{n}</em>{i=1}z_i}{n})|\<br>&amp;=|a(x_i-\overline x)+b(y_i-\overline y)+c(z_i-\overline z)|\<br>\end{split}\end{equation}<br>$$<br>继续求偏导<br>$$\frac{\partial f}{\partial a}=2\sum^n_{i=1} (a(x_i-\overline x)+b(y_i-\overline y)+c(z_i-\overline z))(x_i-\overline x)-2\lambda a=0$$<br>令$\Delta x_i=x_i-\overline x,\Delta y_i=y_i-\overline y,\Delta z_i=z_i-\overline z$<br>则：<br>$$\frac{\partial f}{\partial a}=2\sum^n_{i=1} (a\Delta x_i+b\Delta y_i+c\Delta z_i)\Delta x_i-2\lambda a=0$$<br>同理：$$\frac{\partial f}{\partial b}=2\sum^n_{i=1} (a\Delta x_i+b\Delta y_i+c\Delta z_i)\Delta y_i-2\lambda b=0$$<br>$$\frac{\partial f}{\partial c}=2\sum^n_{i=1} (a\Delta x_i+b\Delta y_i+c\Delta z_i)\Delta z_i-2\lambda c=0$$<br>将上述三式统一：<br>$$<br>\begin{pmatrix}\sum \Delta x_i\Delta x_i &amp; \sum \Delta x_i\Delta y_i &amp;\sum \Delta x_i\Delta z_i\ \sum  \Delta x_i\Delta y_i &amp; \sum \Delta y_i\Delta y_i &amp;\sum \Delta y_i\Delta z_i\\sum \Delta x_i\Delta z_i &amp; \sum \Delta y_i\Delta z_i &amp;\sum \Delta z_i\Delta z_i \end{pmatrix}\begin{pmatrix}a  \ b \c \end{pmatrix}=\lambda\begin{pmatrix}a\b\c \end{pmatrix}<br>$$<br>易得：<br>$$Ax=\lambda x$$<br>即转化到了求解矩阵A的特征值与特征向量的问题，矩阵$A$即为n个点的协方差矩阵。$(a,b,c)^T$即为该矩阵的一个特征向量。</p>
+<p><strong>4. 求最小特征向量</strong><br>如上所示，求得的特征向量可能不止一个，那么如何来选取特征向量，使得求得法向量为最佳拟合平面的法向量呢？<br>由$a^2+b^2+c^2=1,\Rightarrow(x,x)=1$(内积形式)，<br>$Ax=\lambda x,\Rightarrow (Ax,x)=(\lambda x ,x),\Rightarrow \lambda=(Ax,x)$,<br>$\Rightarrow \lambda=\sum_{i=0}^{n}(a\Delta x_i+b\Delta y_i+c\Delta z_i)^2,$<br>$\Rightarrow \lambda=\sum_{i=0}^{n}d_i^2$<br>由$e=\sum^n_{i=1} d_i^2\to min,\lambda \to min$<br>因此，<strong>最小特征值对应的特征向量即为法向量</strong></p>
+<hr>
+<p>#程序应用</p>
+<ul>
+<li><p><strong>PCL中的NormalEstimation</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">    #include &lt;pcl/point_types.h&gt;</span><br><span class="line">    #include &lt;pcl/features/normal_3d.h&gt;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr cloud (new pcl::PointCloud&lt;pcl::PointXYZ&gt;);</span><br><span class="line"></span><br><span class="line">  ... read, pass in or create a point cloud ...</span><br><span class="line"></span><br><span class="line">  // Create the normal estimation class, and pass the input dataset to it</span><br><span class="line">  pcl::NormalEstimation&lt;pcl::PointXYZ, pcl::Normal&gt; ne;</span><br><span class="line">  ne.setInputCloud (cloud);</span><br><span class="line"></span><br><span class="line">  // Create an empty kdtree representation, and pass it to the normal estimation object.</span><br><span class="line">  // Its content will be filled inside the object, based on the given input dataset (as no other search surface is given).</span><br><span class="line">  pcl::search::KdTree&lt;pcl::PointXYZ&gt;::Ptr tree (new pcl::search::KdTree&lt;pcl::PointXYZ&gt; ());</span><br><span class="line">  ne.setSearchMethod (tree);</span><br><span class="line"></span><br><span class="line">  // Output datasets</span><br><span class="line">  pcl::PointCloud&lt;pcl::Normal&gt;::Ptr cloud_normals (new pcl::PointCloud&lt;pcl::Normal&gt;);</span><br><span class="line"></span><br><span class="line">  // Use all neighbors in a sphere of radius 3cm</span><br><span class="line">  ne.setRadiusSearch (0.03);</span><br><span class="line"></span><br><span class="line">  // Compute the features</span><br><span class="line">  ne.compute (*cloud_normals);</span><br><span class="line"></span><br><span class="line">  // cloud_normals-&gt;points.size () should have the same size as the input cloud-&gt;points.size ()*</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>OpenMP加速法线估计</strong><br>PCL提供了表面法线估计的加速实现，基于OpenMP使用多核/多线程来加速计算。 该类的名称是pcl :: NormalEstimationOMP，其API与单线程pcl :: NormalEstimation 100％兼容。 在具有8个内核的系统上，一般计算时间可以加快6-8倍。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">include &lt;pcl/point_types.h&gt;</span><br><span class="line">#include &lt;pcl/features/normal_3d_omp.h&gt;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr cloud (new pcl::PointCloud&lt;pcl::PointXYZ&gt;);</span><br><span class="line"></span><br><span class="line">  ... read, pass in or create a point cloud ...</span><br><span class="line"></span><br><span class="line">  // Create the normal estimation class, and pass the input dataset to it</span><br><span class="line">  pcl::NormalEstimationOMP&lt;pcl::PointXYZ, pcl::Normal&gt; ne;</span><br><span class="line">  ne.setNumberOfThreads(12);  // 手动设置线程数，否则提示错误</span><br><span class="line">  ne.setInputCloud (cloud);</span><br><span class="line"></span><br><span class="line">  // Create an empty kdtree representation, and pass it to the normal estimation object.</span><br><span class="line">  // Its content will be filled inside the object, based on the given input dataset (as no other search surface is given).</span><br><span class="line">  pcl::search::KdTree&lt;pcl::PointXYZ&gt;::Ptr tree (new pcl::search::KdTree&lt;pcl::PointXYZ&gt; ());</span><br><span class="line">  ne.setSearchMethod (tree);</span><br><span class="line"></span><br><span class="line">  // Output datasets</span><br><span class="line">  pcl::PointCloud&lt;pcl::Normal&gt;::Ptr cloud_normals (new pcl::PointCloud&lt;pcl::Normal&gt;);</span><br><span class="line"></span><br><span class="line">  // Use all neighbors in a sphere of radius 3cm</span><br><span class="line">  ne.setRadiusSearch (0.03);</span><br><span class="line"></span><br><span class="line">  // Compute the features</span><br><span class="line">  ne.compute (*cloud_normals);</span><br><span class="line"></span><br><span class="line">  // cloud_normals-&gt;points.size () should have the same size as the input cloud-&gt;points.size ()*</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-envira"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+        
+      
+        <div id="reward-container">
+  <div>如果对您有帮助，请我喝杯汽水吧！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Codehory 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/点云/" rel="tag"># 点云</a>
+            
+              <a href="/tags/PCL/" rel="tag"># PCL</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/16/Leetcode(C++)/4-快速找到未知长度单链表的中间结点（C++）/" rel="next" title="4-快速找到未知长度单链表的中间结点（C++）">
+                  <i class="fa fa-chevron-left"></i> 4-快速找到未知长度单链表的中间结点（C++）
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/pine.jpeg"
+      alt="Codehory">
+  <p class="site-author-name" itemprop="name">Codehory</p>
+  <div class="site-description" itemprop="description">生活在于折腾</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:codehory@foxmail.com" title="E-Mail &rarr; mailto:codehory@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/codehory" title="Weibo &rarr; https://weibo.com/codehory" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.jianshu.com/u/81a8a41ecfee" title="简书 &rarr; https://www.jianshu.com/u/81a8a41ecfee" rel="noopener" target="_blank"><i class="fa fa-fw fa-bug"></i>简书</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id=“heart”>
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Codehory</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">30k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">27 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

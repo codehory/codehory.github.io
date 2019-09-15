@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/spideman.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Codehory's blog" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="#简述Octomap是一种采用八叉树数据结构存储三维环境的概率占据地图。地图单元为体素（立方体）。对于Octomap，作者这里也不过多介绍了。相信你点开这里，对Octomap也有了大致的了解。由于一些特殊需求，我们有时需要在windows环境下进行配置使用Octomap。关于这块，网上的教程鲜有，故写此篇供大家参考。">
+<meta name="keywords" content="配置踩坑,Octomap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Octomap在windows环境配置(任意版本VS)">
+<meta property="og:url" content="http://yoursite.com/2019/07/27/环境配置/Octomap在windows环境配置(任意版本VS)/index.html">
+<meta property="og:site_name" content="Codehory&#39;s blog">
+<meta property="og:description" content="#简述Octomap是一种采用八叉树数据结构存储三维环境的概率占据地图。地图单元为体素（立方体）。对于Octomap，作者这里也不过多介绍了。相信你点开这里，对Octomap也有了大致的了解。由于一些特殊需求，我们有时需要在windows环境下进行配置使用Octomap。关于这块，网上的教程鲜有，故写此篇供大家参考。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-9c43c9ed9d406fca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-e436174b6064896d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-db8e443cb9756876.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-2add3678849850a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-ffd28294925ef2bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-0be499758503137c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-660a50f25e9f1953.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-87d2d73f76071ec6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-58c554c8dfd0da57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-ccc15a365c6f03d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-8546557b2d8effdf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-2479b10a36f7a3a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-0b20f1b27eb68f92.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18864827-3d4b68fd9983edc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-09-13T02:46:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Octomap在windows环境配置(任意版本VS)">
+<meta name="twitter:description" content="#简述Octomap是一种采用八叉树数据结构存储三维环境的概率占据地图。地图单元为体素（立方体）。对于Octomap，作者这里也不过多介绍了。相信你点开这里，对Octomap也有了大致的了解。由于一些特殊需求，我们有时需要在windows环境下进行配置使用Octomap。关于这块，网上的教程鲜有，故写此篇供大家参考。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/18864827-9c43c9ed9d406fca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  <link rel="canonical" href="http://yoursite.com/2019/07/27/环境配置/Octomap在windows环境配置(任意版本VS)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Octomap在windows环境配置(任意版本VS) | Codehory's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Codehory's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">格物要致知</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/环境配置/Octomap在windows环境配置(任意版本VS)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Codehory">
+      <meta itemprop="description" content="生活在于折腾">
+      <meta itemprop="image" content="/images/pine.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Codehory's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Octomap在windows环境配置(任意版本VS)
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-27 12:45:13" itemprop="dateCreated datePublished" datetime="2019-07-27T12:45:13+08:00">2019-07-27</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-13 10:46:54" itemprop="dateModified" datetime="2019-09-13T10:46:54+08:00">2019-09-13</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/环境配置/" itemprop="url" rel="index"><span itemprop="name">环境配置</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>3.4k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>3 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>#简述<br><a href="[http://octomap.github.io/](http://octomap.github.io/)">Octomap</a>是一种采用八叉树数据结构存储三维环境的概率占据地图。地图单元为体素（立方体）。对于Octomap，作者这里也不过多介绍了。相信你点开这里，对Octomap也有了大致的了解。</p><p>由于一些特殊需求，我们有时需要在windows环境下进行配置使用<code>Octomap</code>。关于这块，网上的教程鲜有，故写此篇供大家参考。</p><a id="more"></a>
+
+<p><strong>此教程适用window下任意版本VS。</strong><br>作者这里使用的是：<code>VS2017</code> <code>win10</code> <code>octomap1.9.0</code></p>
+<p>#编译Octomap</p>
+<ul>
+<li><p><strong>安装<a href="[https://cmake.org/download/](https://cmake.org/download/)">Cmake</a></strong><br>点击链接下载安装包，并安装。</p>
+</li>
+<li><p><strong>下载<a href="[https://github.com/octomap/octomap/releases](https://github.com/octomap/octomap/releases)">Octomap</a></strong></p>
+</li>
+<li><p><strong>开始编译</strong><br>在Octomap根目录下新建<code>build</code>文件夹，<br><img src="https://upload-images.jianshu.io/upload_images/18864827-9c43c9ed9d406fca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+</li>
+</ul>
+<p>打开Cmake，添加Octomap目录：1.根目录 2.build目录<br><img src="https://upload-images.jianshu.io/upload_images/18864827-e436174b6064896d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>点击<code>Configure</code>，根据自己的VS版本选择，<br><img src="https://upload-images.jianshu.io/upload_images/18864827-db8e443cb9756876.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>根据自己的平台选择，点<code>Finish</code><br><img src="https://upload-images.jianshu.io/upload_images/18864827-2add3678849850a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>点击<code>Generate</code>。<br><img src="https://upload-images.jianshu.io/upload_images/18864827-ffd28294925ef2bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>进入<code>octomap-1.9.0/build/</code>文件夹，用VS打开<code>ALL_BUILD.vcxproj</code>，选择<code>release</code>or<code>debug</code>,<code>win32</code>or<code>x64</code>（这里要与上面选择的平台一致）,右键解决方案栏里的<code>ALL_BUILD</code>的<code>重新生成</code>，最终显示全部生成成功。<br><img src="https://upload-images.jianshu.io/upload_images/18864827-0be499758503137c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>这样，在<code>octomap-1.9.0</code>文件夹中生成了<code>lib</code>文件夹<br><img src="https://upload-images.jianshu.io/upload_images/18864827-660a50f25e9f1953.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>#VS开发环境配置<br>1.<strong>新建一个空项目</strong><br>2.<strong>菜单栏点击<code>视图-&gt;其他窗口-&gt;属性管理器</code></strong>，按照你上面的选择，选择<code>release</code>or<code>debug</code>,<code>win32</code>or<code>x64</code>，这里以<code>release|x64</code>为例，右键新建<strong><code>添加新项目属性表</code></strong>，取名<code>octomapconfig</code>,添加，<br><img src="https://upload-images.jianshu.io/upload_images/18864827-87d2d73f76071ec6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br><img src="https://upload-images.jianshu.io/upload_images/18864827-58c554c8dfd0da57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>3.<strong>双击新建的属性表</strong><br><strong><code>VC++ 目录-&gt;包含目录-&gt;</code></strong>添加头文件：(根据自己octomap的路径添加)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:\Program Files\octomap-1.9.0\octomap\include</span><br><span class="line">E:\Program Files\octomap-1.9.0\octovis\include</span><br><span class="line">E:\Program Files\octomap-1.9.0\dynamicEDT3D\include</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/18864827-ccc15a365c6f03d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br><strong><code>VC++ 目录-&gt;库目录-&gt;</code></strong>添加库文件：(根据自己octomap的路径添加)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E:\Program Files\octomap-1.9.0\lib</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/18864827-8546557b2d8effdf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br><strong><code>链接器-&gt;输入-&gt;附加依赖项</code></strong>添加lib文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dynamicedt3d.lib</span><br><span class="line">octomap.lib</span><br><span class="line">octomath.lib</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/18864827-2479b10a36f7a3a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>点击确定，配置完成。</p>
+<p>#程序测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;octomap/octomap.h&gt;</span><br><span class="line">#include &lt;octomap/OcTree.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">using namespace octomap;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void print_query_info(point3d query, OcTreeNode* node) &#123;</span><br><span class="line"> if (node != NULL) &#123;</span><br><span class="line">  cout &lt;&lt; &quot;occupancy probability at &quot; &lt;&lt; query &lt;&lt; &quot;:\t &quot; &lt;&lt; node-&gt;getOccupancy() &lt;&lt; endl;</span><br><span class="line"> &#125;</span><br><span class="line"> else</span><br><span class="line">  cout &lt;&lt; &quot;occupancy probability at &quot; &lt;&lt; query &lt;&lt; &quot;:\t is unknown&quot; &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char** argv) &#123;</span><br><span class="line"></span><br><span class="line"> cout &lt;&lt; endl;</span><br><span class="line"> cout &lt;&lt; &quot;generating example map&quot; &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"> OcTree tree(0.1);  // create empty tree with resolution 0.1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> // insert some measurements of occupied cells</span><br><span class="line"></span><br><span class="line"> for (int x = -20; x &lt; 20; x++) &#123;</span><br><span class="line">  for (int y = -20; y &lt; 20; y++) &#123;</span><br><span class="line">   for (int z = -20; z &lt; 20; z++) &#123;</span><br><span class="line">    point3d endpoint((float)x*0.05f, (float)y*0.05f, (float)z*0.05f);</span><br><span class="line">    tree.updateNode(endpoint, true); // integrate &apos;occupied&apos; measurement</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> // insert some measurements of free cells</span><br><span class="line"></span><br><span class="line"> for (int x = -30; x &lt; 30; x++) &#123;</span><br><span class="line">  for (int y = -30; y &lt; 30; y++) &#123;</span><br><span class="line">   for (int z = -30; z &lt; 30; z++) &#123;</span><br><span class="line">    point3d endpoint((float)x*0.02f - 1.0f, (float)y*0.02f - 1.0f, (float)z*0.02f - 1.0f);</span><br><span class="line">    tree.updateNode(endpoint, false);  // integrate &apos;free&apos; measurement</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> cout &lt;&lt; endl;</span><br><span class="line"> cout &lt;&lt; &quot;performing some queries:&quot; &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"> point3d query(0., 0., 0.);</span><br><span class="line"> OcTreeNode* result = tree.search(query);</span><br><span class="line"> print_query_info(query, result);</span><br><span class="line"></span><br><span class="line"> query = point3d(-1., -1., -1.);</span><br><span class="line"> result = tree.search(query);</span><br><span class="line"> print_query_info(query, result);</span><br><span class="line"></span><br><span class="line"> query = point3d(1., 1., 1.);</span><br><span class="line"> result = tree.search(query);</span><br><span class="line"> print_query_info(query, result);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> cout &lt;&lt; endl;</span><br><span class="line"> tree.writeBinary(&quot;simple_tree.bt&quot;);</span><br><span class="line"> cout &lt;&lt; &quot;wrote example file simple_tree.bt&quot; &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line"> cout &lt;&lt; &quot;now you can use octovis to visualize: octovis simple_tree.bt&quot; &lt;&lt; endl;</span><br><span class="line"> cout &lt;&lt; &quot;Hint: hit &apos;F&apos;-key in viewer to see the freespace&quot; &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果生成成功，运行没有问题，表明配置成功！</p>
+<p>#相关问题<br>如果测试程序生成出现这样的报错，<br><img src="https://upload-images.jianshu.io/upload_images/18864827-0b20f1b27eb68f92.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br><strong>解决办法：</strong><br><strong><code>项目-&gt;属性-&gt;C/C++-&gt;语言-&gt;符合模式-&gt;否</code></strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/18864827-3d4b68fd9983edc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>#结语<br><strong><em>至此，相信你也和我一样，已经配置成功了。</em></strong><br><strong><em>如有任何问题或是书写纰漏，请给我留言，我会帮你们耐心解决。</em></strong><br><strong><em>感谢观看，希望对你们有所帮助！</em></strong></p>
+
+    </div>
+
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-envira"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+        
+      
+        <div id="reward-container">
+  <div>如果对您有帮助，请我喝杯汽水吧！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Codehory 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/配置踩坑/" rel="tag"># 配置踩坑</a>
+            
+              <a href="/tags/Octomap/" rel="tag"># Octomap</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/07/25/玩转hexo/hexo+github博客搭建与备份教程（详细篇）/" rel="next" title="hexo+github博客搭建与备份教程（详细篇）">
+                  <i class="fa fa-chevron-left"></i> hexo+github博客搭建与备份教程（详细篇）
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/07/28/Leetcode(C++)/1-两数之和（C++）/" rel="prev" title="1-两数之和（C++）">
+                  1-两数之和（C++） <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/pine.jpeg"
+      alt="Codehory">
+  <p class="site-author-name" itemprop="name">Codehory</p>
+  <div class="site-description" itemprop="description">生活在于折腾</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:codehory@foxmail.com" title="E-Mail &rarr; mailto:codehory@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/codehory" title="Weibo &rarr; https://weibo.com/codehory" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.jianshu.com/u/81a8a41ecfee" title="简书 &rarr; https://www.jianshu.com/u/81a8a41ecfee" rel="noopener" target="_blank"><i class="fa fa-fw fa-bug"></i>简书</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id=“heart”>
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Codehory</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">30k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">27 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
