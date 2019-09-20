@@ -56,18 +56,18 @@
   };
 </script>
 
-  <meta name="description" content="#给定一个未知长度的单链表，快速求得其中间节点12示例：输入：1-&amp;gt;3-&amp;gt;5-&amp;gt;3-&amp;gt;9     输出：5#思路普通解法：要找到中间结点，首先想到的是通过遍历链表，得到链表的长度。再次遍历链表，找到长度一半的位置，即为解。时间复杂度为O(3/2N)快慢指针法：定义两个指针p1，p2，均指向头结点。我们让p2的移动速度是p1的两倍。当p2指向尾结点时，p1指向的即为中间结点。">
+  <meta name="description" content="给定一个未知长度的单链表，快速求得其中间节点12示例：输入：1-&amp;gt;3-&amp;gt;5-&amp;gt;3-&amp;gt;9     输出：5思路普通解法：要找到中间结点，首先想到的是通过遍历链表，得到链表的长度。再次遍历链表，找到长度一半的位置，即为解。时间复杂度为O(3/2N)快慢指针法：定义两个指针p1，p2，均指向头结点。我们让p2的移动速度是p1的两倍。当p2指向尾结点时，p1指向的即为中间结点。时间">
 <meta name="keywords" content="Leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4-快速找到未知长度单链表的中间结点（C++）">
 <meta property="og:url" content="http://yoursite.com/2019/08/16/Leetcode(C++)/4-快速找到未知长度单链表的中间结点（C++）/index.html">
 <meta property="og:site_name" content="Codehory&#39;s blog">
-<meta property="og:description" content="#给定一个未知长度的单链表，快速求得其中间节点12示例：输入：1-&amp;gt;3-&amp;gt;5-&amp;gt;3-&amp;gt;9     输出：5#思路普通解法：要找到中间结点，首先想到的是通过遍历链表，得到链表的长度。再次遍历链表，找到长度一半的位置，即为解。时间复杂度为O(3/2N)快慢指针法：定义两个指针p1，p2，均指向头结点。我们让p2的移动速度是p1的两倍。当p2指向尾结点时，p1指向的即为中间结点。">
+<meta property="og:description" content="给定一个未知长度的单链表，快速求得其中间节点12示例：输入：1-&amp;gt;3-&amp;gt;5-&amp;gt;3-&amp;gt;9     输出：5思路普通解法：要找到中间结点，首先想到的是通过遍历链表，得到链表的长度。再次遍历链表，找到长度一半的位置，即为解。时间复杂度为O(3/2N)快慢指针法：定义两个指针p1，p2，均指向头结点。我们让p2的移动速度是p1的两倍。当p2指向尾结点时，p1指向的即为中间结点。时间">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-09-13T02:49:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="4-快速找到未知长度单链表的中间结点（C++）">
-<meta name="twitter:description" content="#给定一个未知长度的单链表，快速求得其中间节点12示例：输入：1-&amp;gt;3-&amp;gt;5-&amp;gt;3-&amp;gt;9     输出：5#思路普通解法：要找到中间结点，首先想到的是通过遍历链表，得到链表的长度。再次遍历链表，找到长度一半的位置，即为解。时间复杂度为O(3/2N)快慢指针法：定义两个指针p1，p2，均指向头结点。我们让p2的移动速度是p1的两倍。当p2指向尾结点时，p1指向的即为中间结点。">
+<meta name="twitter:description" content="给定一个未知长度的单链表，快速求得其中间节点12示例：输入：1-&amp;gt;3-&amp;gt;5-&amp;gt;3-&amp;gt;9     输出：5思路普通解法：要找到中间结点，首先想到的是通过遍历链表，得到链表的长度。再次遍历链表，找到长度一半的位置，即为解。时间复杂度为O(3/2N)快慢指针法：定义两个指针p1，p2，均指向头结点。我们让p2的移动速度是p1的两倍。当p2指向尾结点时，p1指向的即为中间结点。时间">
   <link rel="canonical" href="http://yoursite.com/2019/08/16/Leetcode(C++)/4-快速找到未知长度单链表的中间结点（C++）/">
 
 
@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>652</span>
+              <span>649</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -356,14 +356,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>#给定一个未知长度的单链表，快速求得其中间节点</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">示例：输入：1-&gt;3-&gt;5-&gt;3-&gt;9</span><br><span class="line">     输出：5</span><br></pre></td></tr></table></figure><p>#思路<br>普通解法：要找到中间结点，首先想到的是通过遍历链表，得到链表的长度。再次遍历链表，找到长度一半的位置，即为解。时间复杂度为<code>O(3/2N)</code></p><p><strong>快慢指针法</strong>：定义两个指针p1，p2，均指向头结点。我们让p2的移动速度是p1的两倍。当p2指向尾结点时，p1指向的即为中间结点。时间复杂度为<code>O(1/2N)</code></p><a id="more"></a>
+        <h1 id="给定一个未知长度的单链表，快速求得其中间节点"><a href="#给定一个未知长度的单链表，快速求得其中间节点" class="headerlink" title="给定一个未知长度的单链表，快速求得其中间节点"></a>给定一个未知长度的单链表，快速求得其中间节点</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">示例：输入：1-&gt;3-&gt;5-&gt;3-&gt;9</span><br><span class="line">     输出：5</span><br></pre></td></tr></table></figure><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>普通解法：要找到中间结点，首先想到的是通过遍历链表，得到链表的长度。再次遍历链表，找到长度一半的位置，即为解。时间复杂度为<code>O(3/2N)</code></p><p><strong>快慢指针法</strong>：定义两个指针p1，p2，均指向头结点。我们让p2的移动速度是p1的两倍。当p2指向尾结点时，p1指向的即为中间结点。时间复杂度为<code>O(1/2N)</code></p><a id="more"></a>
 
 
-
-
-<p>#解：(快慢指针)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findMidNode(ListNode *L) &#123;</span><br><span class="line">        ListNode *p1=L-&gt;next;       //链表包含头结点</span><br><span class="line">        ListNode *p2=L-&gt;next;</span><br><span class="line">        while(p2-&gt;next!=NULL)&#123;</span><br><span class="line">          if(p2-&gt;next-&gt;next!=NULL) &#123;</span><br><span class="line">              p2 = p2-&gt;next-&gt;next;</span><br><span class="line">              p1 = p1-&gt;next;</span><br><span class="line">          &#125;</span><br><span class="line">          else</span><br><span class="line">              p2=p2-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    return p1-&gt;val;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<h1 id="解：-快慢指针"><a href="#解：-快慢指针" class="headerlink" title="解：(快慢指针)"></a>解：(快慢指针)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findMidNode(ListNode *L) &#123;</span><br><span class="line">        ListNode *p1=L-&gt;next;       //链表包含头结点</span><br><span class="line">        ListNode *p2=L-&gt;next;</span><br><span class="line">        while(p2-&gt;next!=NULL)&#123;</span><br><span class="line">          if(p2-&gt;next-&gt;next!=NULL) &#123;</span><br><span class="line">              p2 = p2-&gt;next-&gt;next;</span><br><span class="line">              p1 = p1-&gt;next;</span><br><span class="line">          &#125;</span><br><span class="line">          else</span><br><span class="line">              p2=p2-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    return p1-&gt;val;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -426,8 +422,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/08/25/图像视觉/点云法向量估计原理及应用PCL/" rel="prev" title="点云法向量估计原理及应用PCL">
-                  点云法向量估计原理及应用PCL <i class="fa fa-chevron-right"></i>
+                <a href="/2019/09/20/20190920090725/" rel="prev" title="20190920090725">
+                  20190920090725 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -446,6 +442,13 @@
 
           </div>
           
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="data-uid="MTAyMC80NjcyNC8yMzIzMw==""></div>
+  </div>
+  
+  
 
         </div>
           
@@ -477,6 +480,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#给定一个未知长度的单链表，快速求得其中间节点"><span class="nav-number">1.</span> <span class="nav-text">给定一个未知长度的单链表，快速求得其中间节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解：-快慢指针"><span class="nav-number">3.</span> <span class="nav-text">解：(快慢指针)</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -493,7 +498,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -676,6 +681,22 @@
   
 
   
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
 </body>
 </html>

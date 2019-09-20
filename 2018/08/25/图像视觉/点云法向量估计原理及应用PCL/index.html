@@ -56,21 +56,21 @@
   };
 </script>
 
-  <meta name="description" content="#简述点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！格物要致知：）">
+  <meta name="description" content="简述点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！格物要致知：）">
 <meta name="keywords" content="点云,PCL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="点云法向量估计原理及应用PCL">
-<meta property="og:url" content="http://yoursite.com/2019/08/25/图像视觉/点云法向量估计原理及应用PCL/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/08/25/图像视觉/点云法向量估计原理及应用PCL/index.html">
 <meta property="og:site_name" content="Codehory&#39;s blog">
-<meta property="og:description" content="#简述点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！格物要致知：）">
+<meta property="og:description" content="简述点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！格物要致知：）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/08/25/图像视觉/images/background.jpeg">
-<meta property="og:updated_time" content="2019-09-15T06:43:41.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/25/图像视觉/images/background.jpeg">
+<meta property="og:updated_time" content="2019-09-19T16:02:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="点云法向量估计原理及应用PCL">
-<meta name="twitter:description" content="#简述点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！格物要致知：）">
-<meta name="twitter:image" content="http://yoursite.com/2019/08/25/图像视觉/images/background.jpeg">
-  <link rel="canonical" href="http://yoursite.com/2019/08/25/图像视觉/点云法向量估计原理及应用PCL/">
+<meta name="twitter:description" content="简述点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！格物要致知：）">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/25/图像视觉/images/background.jpeg">
+  <link rel="canonical" href="http://yoursite.com/2018/08/25/图像视觉/点云法向量估计原理及应用PCL/">
 
 
 <script id="page-configurations">
@@ -261,7 +261,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/25/图像视觉/点云法向量估计原理及应用PCL/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/25/图像视觉/点云法向量估计原理及应用PCL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Codehory">
@@ -289,7 +289,7 @@
                 
               
 
-              <time title="创建时间：2019-08-25 00:31:57" itemprop="dateCreated datePublished" datetime="2019-08-25T00:31:57+08:00">2019-08-25</time>
+              <time title="创建时间：2018-08-25 00:31:57" itemprop="dateCreated datePublished" datetime="2018-08-25T00:31:57+08:00">2018-08-25</time>
             </span>
           
             
@@ -300,7 +300,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-15 14:43:41" itemprop="dateModified" datetime="2019-09-15T14:43:41+08:00">2019-09-15</time>
+                <time title="修改时间：2019-09-20 00:02:48" itemprop="dateModified" datetime="2019-09-20T00:02:48+08:00">2019-09-20</time>
               </span>
             
           
@@ -335,7 +335,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>5k</span>
+              <span>4.9k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -345,7 +345,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>5 分钟</span>
+              <span>4 分钟</span>
             </span>
           
 
@@ -366,31 +366,43 @@
 
           </div>
         </div>
-        <p>#简述<br>点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。<strong>表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。</strong>在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！<strong>格物要致知：）</strong><br><img src="https://upload-images.jianshu.io/upload_images/18864827-a32315d395f19a5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+        <h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p>点云法向量估计这个问题，相信很多人在点云处理，曲面重建的过程中遇到过。<strong>表面法线是几何体面的重要属性。而点云数据集在真实物体的表面表现为一组定点样本。对点云数据集的每个点的法线估计，可以看作是对表面法线的近似推断。</strong>在开源库提供我们调用便利的同时，了解其实现原理也有利于我们对问题的深刻认识！<strong>格物要致知：）</strong><br><img src="https://upload-images.jianshu.io/upload_images/18864827-a32315d395f19a5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
 <a id="more"></a>
-
-
-<p>#原理<br><strong><em>确定表面一点法线的问题近似于估计表面的一个相切面法线的问题，因此转换过来以后就变成一个最小二乘法平面拟合估计问题。</em></strong></p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p><strong><em>确定表面一点法线的问题近似于估计表面的一个相切面法线的问题，因此转换过来以后就变成一个最小二乘法平面拟合估计问题。</em></strong></p>
 <ul>
-<li><p><strong>平面方程</strong><br>$$cos\alpha·x+cos\beta·y+cos\gamma·z+p=0$$</p>
-<p>$cos\alpha,cos\beta,cos\gamma$为平面上点$(x,y,z)$处法向量的方向余弦，$|p|$为原点到平面的距离。<br>$$<br>ax+by+cz=d(d\geq0),a^{2}+b^{2}+c^{2}=1$$<br>求平面方程即转化为求$a,b,c,d$四个参数。</p>
+<li><p><strong>平面方程</strong></p>
+<script type="math/tex; mode=display">cos\alpha·x+cos\beta·y+cos\gamma·z+p=0</script><p>$cos\alpha,cos\beta,cos\gamma$为平面上点$(x,y,z)$处法向量的方向余弦，$|p|$为原点到平面的距离。</p>
+<script type="math/tex; mode=display">
+ax+by+cz=d(d\geq0),a^{2}+b^{2}+c^{2}=1</script><p>求平面方程即转化为求$a,b,c,d$四个参数。</p>
 </li>
-<li><p><strong>求解过程</strong></p>
-</li>
+<li><strong>求解过程</strong></li>
 </ul>
-<p><strong>1. 待拟合平面点集$(x_i,y_i,z_i),i=1,2,…,n$</strong><br>待拟合的平面方程：$$ax+by+cz=d(d\geq0),a^{2}+b^{2}+c^{2}=1$$<br>任意点到平面的距离：$$d_i=|ax+by+cz-d|$$</p>
-<p><strong>2. 要获得最佳拟合平面，则需要满足：</strong><br>$$e=\sum^n_{i=1} d_i^2\to min$$<br>因此，转化为求解极值的问题，<br>$$f=\sum^n_{i=1} d_i^2\space-\lambda(a^{2}+b^{2}+c^{2}-1)$$</p>
-<p><strong>3. 分别对$d,a,b,c$求偏导</strong><br>$$<br>\frac{\partial f}{\partial d}=-2\sum^n_{i=1} (ax_i+by_i+cz_i-d)=0<br>$$<br>$$<br>d=\frac{\sum ^{n}<em>{i=1}x_i}{n}a+\frac{\sum^{n}</em>{i=1}y_i}{n}b+\frac{\sum^{n}<em>{i=1}z_i}{n}c<br>$$<br>将$d$带入任意点到平面的距离公式：<br>$$<br>\begin{equation}\begin{split}<br>d_i&amp;=|a(x_i-\frac{\sum ^{n}</em>{i=1}x_i}{n})+b(y_i-\frac{\sum ^{n}<em>{i=1}y_i}{n})+c(z_i-\frac{\sum ^{n}</em>{i=1}z_i}{n})|\<br>&amp;=|a(x_i-\overline x)+b(y_i-\overline y)+c(z_i-\overline z)|\<br>\end{split}\end{equation}<br>$$<br>继续求偏导<br>$$\frac{\partial f}{\partial a}=2\sum^n_{i=1} (a(x_i-\overline x)+b(y_i-\overline y)+c(z_i-\overline z))(x_i-\overline x)-2\lambda a=0$$<br>令$\Delta x_i=x_i-\overline x,\Delta y_i=y_i-\overline y,\Delta z_i=z_i-\overline z$<br>则：<br>$$\frac{\partial f}{\partial a}=2\sum^n_{i=1} (a\Delta x_i+b\Delta y_i+c\Delta z_i)\Delta x_i-2\lambda a=0$$<br>同理：$$\frac{\partial f}{\partial b}=2\sum^n_{i=1} (a\Delta x_i+b\Delta y_i+c\Delta z_i)\Delta y_i-2\lambda b=0$$<br>$$\frac{\partial f}{\partial c}=2\sum^n_{i=1} (a\Delta x_i+b\Delta y_i+c\Delta z_i)\Delta z_i-2\lambda c=0$$<br>将上述三式统一：<br>$$<br>\begin{pmatrix}\sum \Delta x_i\Delta x_i &amp; \sum \Delta x_i\Delta y_i &amp;\sum \Delta x_i\Delta z_i\ \sum  \Delta x_i\Delta y_i &amp; \sum \Delta y_i\Delta y_i &amp;\sum \Delta y_i\Delta z_i\\sum \Delta x_i\Delta z_i &amp; \sum \Delta y_i\Delta z_i &amp;\sum \Delta z_i\Delta z_i \end{pmatrix}\begin{pmatrix}a  \ b \c \end{pmatrix}=\lambda\begin{pmatrix}a\b\c \end{pmatrix}<br>$$<br>易得：<br>$$Ax=\lambda x$$<br>即转化到了求解矩阵A的特征值与特征向量的问题，矩阵$A$即为n个点的协方差矩阵。$(a,b,c)^T$即为该矩阵的一个特征向量。</p>
+<p><strong>1. 待拟合平面点集$(x_i,y_i,z_i),i=1,2,…,n$</strong><br>待拟合的平面方程：<script type="math/tex">ax+by+cz=d(d\geq0),a^{2}+b^{2}+c^{2}=1</script><br>任意点到平面的距离：<script type="math/tex">d_i=|ax+by+cz-d|</script></p>
+<p><strong>2. 要获得最佳拟合平面，则需要满足：</strong></p>
+<script type="math/tex; mode=display">e=\sum^n_{i=1} d_i^2\to min</script><p>因此，转化为求解极值的问题，</p>
+<script type="math/tex; mode=display">f=\sum^n_{i=1} d_i^2\space-\lambda(a^{2}+b^{2}+c^{2}-1)</script><p><strong>3. 分别对$d,a,b,c$求偏导</strong></p>
+<script type="math/tex; mode=display">
+\frac{\partial f}{\partial d}=-2\sum^n_{i=1} (ax_i+by_i+cz_i-d)=0</script><script type="math/tex; mode=display">
+d=\frac{\sum ^{n}_{i=1}x_i}{n}a+\frac{\sum^{n}_{i=1}y_i}{n}b+\frac{\sum^{n}_{i=1}z_i}{n}c</script><p>将$d$带入任意点到平面的距离公式：</p>
+<script type="math/tex; mode=display">
+\begin{equation}\begin{split}
+d_i&=|a(x_i-\frac{\sum ^{n}_{i=1}x_i}{n})+b(y_i-\frac{\sum ^{n}_{i=1}y_i}{n})+c(z_i-\frac{\sum ^{n}_{i=1}z_i}{n})|\\
+&=|a(x_i-\overline x)+b(y_i-\overline y)+c(z_i-\overline z)|\\
+\end{split}\end{equation}</script><p>继续求偏导</p>
+<script type="math/tex; mode=display">\frac{\partial f}{\partial a}=2\sum^n_{i=1} (a(x_i-\overline x)+b(y_i-\overline y)+c(z_i-\overline z))(x_i-\overline x)-2\lambda a=0</script><p>令$\Delta x_i=x_i-\overline x,\Delta y_i=y_i-\overline y,\Delta z_i=z_i-\overline z$<br>则：</p>
+<script type="math/tex; mode=display">\frac{\partial f}{\partial a}=2\sum^n_{i=1} (a\Delta x_i+b\Delta y_i+c\Delta z_i)\Delta x_i-2\lambda a=0</script><p>同理：<script type="math/tex">\frac{\partial f}{\partial b}=2\sum^n_{i=1} (a\Delta x_i+b\Delta y_i+c\Delta z_i)\Delta y_i-2\lambda b=0</script></p>
+<script type="math/tex; mode=display">\frac{\partial f}{\partial c}=2\sum^n_{i=1} (a\Delta x_i+b\Delta y_i+c\Delta z_i)\Delta z_i-2\lambda c=0</script><p>将上述三式统一：</p>
+<script type="math/tex; mode=display">
+\begin{pmatrix}\sum \Delta x_i\Delta x_i & \sum \Delta x_i\Delta y_i &\sum \Delta x_i\Delta z_i\\ \sum  \Delta x_i\Delta y_i & \sum \Delta y_i\Delta y_i &\sum \Delta y_i\Delta z_i\\\sum \Delta x_i\Delta z_i & \sum \Delta y_i\Delta z_i &\sum \Delta z_i\Delta z_i \end{pmatrix}\begin{pmatrix}a  \\ b \\c \end{pmatrix}=\lambda\begin{pmatrix}a\\b\\c \end{pmatrix}</script><p>易得：</p>
+<script type="math/tex; mode=display">Ax=\lambda x</script><p>即转化到了求解矩阵A的特征值与特征向量的问题，矩阵$A$即为n个点的协方差矩阵。$(a,b,c)^T$即为该矩阵的一个特征向量。</p>
 <p><strong>4. 求最小特征向量</strong><br>如上所示，求得的特征向量可能不止一个，那么如何来选取特征向量，使得求得法向量为最佳拟合平面的法向量呢？<br>由$a^2+b^2+c^2=1,\Rightarrow(x,x)=1$(内积形式)，<br>$Ax=\lambda x,\Rightarrow (Ax,x)=(\lambda x ,x),\Rightarrow \lambda=(Ax,x)$,<br>$\Rightarrow \lambda=\sum_{i=0}^{n}(a\Delta x_i+b\Delta y_i+c\Delta z_i)^2,$<br>$\Rightarrow \lambda=\sum_{i=0}^{n}d_i^2$<br>由$e=\sum^n_{i=1} d_i^2\to min,\lambda \to min$<br>因此，<strong>最小特征值对应的特征向量即为法向量</strong></p>
 <hr>
-<p>#程序应用</p>
-<ul>
+<h1 id="程序应用"><a href="#程序应用" class="headerlink" title="程序应用"></a>程序应用</h1><ul>
 <li><p><strong>PCL中的NormalEstimation</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">    #include &lt;pcl/point_types.h&gt;</span><br><span class="line">    #include &lt;pcl/features/normal_3d.h&gt;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr cloud (new pcl::PointCloud&lt;pcl::PointXYZ&gt;);</span><br><span class="line"></span><br><span class="line">  ... read, pass in or create a point cloud ...</span><br><span class="line"></span><br><span class="line">  // Create the normal estimation class, and pass the input dataset to it</span><br><span class="line">  pcl::NormalEstimation&lt;pcl::PointXYZ, pcl::Normal&gt; ne;</span><br><span class="line">  ne.setInputCloud (cloud);</span><br><span class="line"></span><br><span class="line">  // Create an empty kdtree representation, and pass it to the normal estimation object.</span><br><span class="line">  // Its content will be filled inside the object, based on the given input dataset (as no other search surface is given).</span><br><span class="line">  pcl::search::KdTree&lt;pcl::PointXYZ&gt;::Ptr tree (new pcl::search::KdTree&lt;pcl::PointXYZ&gt; ());</span><br><span class="line">  ne.setSearchMethod (tree);</span><br><span class="line"></span><br><span class="line">  // Output datasets</span><br><span class="line">  pcl::PointCloud&lt;pcl::Normal&gt;::Ptr cloud_normals (new pcl::PointCloud&lt;pcl::Normal&gt;);</span><br><span class="line"></span><br><span class="line">  // Use all neighbors in a sphere of radius 3cm</span><br><span class="line">  ne.setRadiusSearch (0.03);</span><br><span class="line"></span><br><span class="line">  // Compute the features</span><br><span class="line">  ne.compute (*cloud_normals);</span><br><span class="line"></span><br><span class="line">  // cloud_normals-&gt;points.size () should have the same size as the input cloud-&gt;points.size ()*</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>OpenMP加速法线估计</strong><br>PCL提供了表面法线估计的加速实现，基于OpenMP使用多核/多线程来加速计算。 该类的名称是pcl :: NormalEstimationOMP，其API与单线程pcl :: NormalEstimation 100％兼容。 在具有8个内核的系统上，一般计算时间可以加快6-8倍。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">include &lt;pcl/point_types.h&gt;</span><br><span class="line">#include &lt;pcl/features/normal_3d_omp.h&gt;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr cloud (new pcl::PointCloud&lt;pcl::PointXYZ&gt;);</span><br><span class="line"></span><br><span class="line">  ... read, pass in or create a point cloud ...</span><br><span class="line"></span><br><span class="line">  // Create the normal estimation class, and pass the input dataset to it</span><br><span class="line">  pcl::NormalEstimationOMP&lt;pcl::PointXYZ, pcl::Normal&gt; ne;</span><br><span class="line">  ne.setNumberOfThreads(12);  // 手动设置线程数，否则提示错误</span><br><span class="line">  ne.setInputCloud (cloud);</span><br><span class="line"></span><br><span class="line">  // Create an empty kdtree representation, and pass it to the normal estimation object.</span><br><span class="line">  // Its content will be filled inside the object, based on the given input dataset (as no other search surface is given).</span><br><span class="line">  pcl::search::KdTree&lt;pcl::PointXYZ&gt;::Ptr tree (new pcl::search::KdTree&lt;pcl::PointXYZ&gt; ());</span><br><span class="line">  ne.setSearchMethod (tree);</span><br><span class="line"></span><br><span class="line">  // Output datasets</span><br><span class="line">  pcl::PointCloud&lt;pcl::Normal&gt;::Ptr cloud_normals (new pcl::PointCloud&lt;pcl::Normal&gt;);</span><br><span class="line"></span><br><span class="line">  // Use all neighbors in a sphere of radius 3cm</span><br><span class="line">  ne.setRadiusSearch (0.03);</span><br><span class="line"></span><br><span class="line">  // Compute the features</span><br><span class="line">  ne.compute (*cloud_normals);</span><br><span class="line"></span><br><span class="line">  // cloud_normals-&gt;points.size () should have the same size as the input cloud-&gt;points.size ()*</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 
@@ -447,15 +459,15 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/08/16/Leetcode(C++)/4-快速找到未知长度单链表的中间结点（C++）/" rel="next" title="4-快速找到未知长度单链表的中间结点（C++）">
-                  <i class="fa fa-chevron-left"></i> 4-快速找到未知长度单链表的中间结点（C++）
-                </a>
-              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/05/21/Kinect开发/Kinect-V2-For-Windows-开发（一）：SDK+VS20XX环境搭建/" rel="prev" title="Kinect-V2-For-Windows-开发（一）：SDK+VS20XX环境搭建">
+                  Kinect-V2-For-Windows-开发（一）：SDK+VS20XX环境搭建 <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -473,6 +485,13 @@
 
           </div>
           
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="data-uid="MTAyMC80NjcyNC8yMzIzMw==""></div>
+  </div>
+  
+  
 
         </div>
           
@@ -504,6 +523,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简述"><span class="nav-number">1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序应用"><span class="nav-number">3.</span> <span class="nav-text">程序应用</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -520,7 +541,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -701,8 +722,74 @@
   
 
   
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
 
   
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
 </body>
 </html>
