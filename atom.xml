@@ -5,9 +5,9 @@
   <subtitle>格物要致知</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://codehory.com/"/>
   <updated>2019-09-30T12:47:25.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://codehory.com/</id>
   
   <author>
     <name>Codehory</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>4-快速找到未知长度单链表的中间结点（C++）</title>
-    <link href="http://yoursite.com/2019/08/16/Leetcode(C++)/4-%E5%BF%AB%E9%80%9F%E6%89%BE%E5%88%B0%E6%9C%AA%E7%9F%A5%E9%95%BF%E5%BA%A6%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E4%B8%AD%E9%97%B4%E7%BB%93%E7%82%B9%EF%BC%88C++%EF%BC%89/"/>
-    <id>http://yoursite.com/2019/08/16/Leetcode(C++)/4-快速找到未知长度单链表的中间结点（C++）/</id>
+    <link href="http://codehory.com/2019/08/16/Leetcode(C++)/4-%E5%BF%AB%E9%80%9F%E6%89%BE%E5%88%B0%E6%9C%AA%E7%9F%A5%E9%95%BF%E5%BA%A6%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E4%B8%AD%E9%97%B4%E7%BB%93%E7%82%B9%EF%BC%88C++%EF%BC%89/"/>
+    <id>http://codehory.com/2019/08/16/Leetcode(C++)/4-快速找到未知长度单链表的中间结点（C++）/</id>
     <published>2019-08-15T16:25:16.000Z</published>
     <updated>2019-09-30T12:47:25.000Z</updated>
     
@@ -32,17 +32,17 @@
     </summary>
     
     
-      <category term="Leetcode（C++）" scheme="http://yoursite.com/categories/Leetcode%EF%BC%88C-%EF%BC%89/"/>
+      <category term="Leetcode（C++）" scheme="http://codehory.com/categories/Leetcode%EF%BC%88C-%EF%BC%89/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+      <category term="Leetcode" scheme="http://codehory.com/tags/Leetcode/"/>
     
   </entry>
   
   <entry>
     <title>3-无重复字符的最长子串（C++）</title>
-    <link href="http://yoursite.com/2019/08/01/Leetcode(C++)/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%EF%BC%88C++%EF%BC%89/"/>
-    <id>http://yoursite.com/2019/08/01/Leetcode(C++)/3-无重复字符的最长子串（C++）/</id>
+    <link href="http://codehory.com/2019/08/01/Leetcode(C++)/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%EF%BC%88C++%EF%BC%89/"/>
+    <id>http://codehory.com/2019/08/01/Leetcode(C++)/3-无重复字符的最长子串（C++）/</id>
     <published>2019-08-01T07:56:02.000Z</published>
     <updated>2019-09-30T12:47:14.000Z</updated>
     
@@ -55,17 +55,17 @@
     </summary>
     
     
-      <category term="Leetcode（C++）" scheme="http://yoursite.com/categories/Leetcode%EF%BC%88C-%EF%BC%89/"/>
+      <category term="Leetcode（C++）" scheme="http://codehory.com/categories/Leetcode%EF%BC%88C-%EF%BC%89/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+      <category term="Leetcode" scheme="http://codehory.com/tags/Leetcode/"/>
     
   </entry>
   
   <entry>
     <title>2--两数相加（C++）</title>
-    <link href="http://yoursite.com/2019/07/31/Leetcode(C++)/2--%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0%EF%BC%88C++%EF%BC%89/"/>
-    <id>http://yoursite.com/2019/07/31/Leetcode(C++)/2--两数相加（C++）/</id>
+    <link href="http://codehory.com/2019/07/31/Leetcode(C++)/2--%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0%EF%BC%88C++%EF%BC%89/"/>
+    <id>http://codehory.com/2019/07/31/Leetcode(C++)/2--两数相加（C++）/</id>
     <published>2019-07-31T05:07:27.000Z</published>
     <updated>2019-09-30T12:46:54.000Z</updated>
     
@@ -81,17 +81,17 @@
     </summary>
     
     
-      <category term="Leetcode（C++）" scheme="http://yoursite.com/categories/Leetcode%EF%BC%88C-%EF%BC%89/"/>
+      <category term="Leetcode（C++）" scheme="http://codehory.com/categories/Leetcode%EF%BC%88C-%EF%BC%89/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+      <category term="Leetcode" scheme="http://codehory.com/tags/Leetcode/"/>
     
   </entry>
   
   <entry>
     <title>1-两数之和（C++）</title>
-    <link href="http://yoursite.com/2019/07/28/Leetcode(C++)/1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%88C++%EF%BC%89/"/>
-    <id>http://yoursite.com/2019/07/28/Leetcode(C++)/1-两数之和（C++）/</id>
+    <link href="http://codehory.com/2019/07/28/Leetcode(C++)/1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%88C++%EF%BC%89/"/>
+    <id>http://codehory.com/2019/07/28/Leetcode(C++)/1-两数之和（C++）/</id>
     <published>2019-07-28T15:16:37.000Z</published>
     <updated>2019-09-30T12:45:13.000Z</updated>
     
@@ -107,17 +107,17 @@
     </summary>
     
     
-      <category term="Leetcode（C++）" scheme="http://yoursite.com/categories/Leetcode%EF%BC%88C-%EF%BC%89/"/>
+      <category term="Leetcode（C++）" scheme="http://codehory.com/categories/Leetcode%EF%BC%88C-%EF%BC%89/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+      <category term="Leetcode" scheme="http://codehory.com/tags/Leetcode/"/>
     
   </entry>
   
   <entry>
     <title>Octomap在windows环境配置(任意版本VS)</title>
-    <link href="http://yoursite.com/2019/07/27/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Octomap%E5%9C%A8windows%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE(%E4%BB%BB%E6%84%8F%E7%89%88%E6%9C%ACVS)/"/>
-    <id>http://yoursite.com/2019/07/27/环境配置/Octomap在windows环境配置(任意版本VS)/</id>
+    <link href="http://codehory.com/2019/07/27/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Octomap%E5%9C%A8windows%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE(%E4%BB%BB%E6%84%8F%E7%89%88%E6%9C%ACVS)/"/>
+    <id>http://codehory.com/2019/07/27/环境配置/Octomap在windows环境配置(任意版本VS)/</id>
     <published>2019-07-27T04:45:13.000Z</published>
     <updated>2019-09-30T10:09:29.000Z</updated>
     
@@ -130,19 +130,19 @@
     </summary>
     
     
-      <category term="环境配置" scheme="http://yoursite.com/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+      <category term="环境配置" scheme="http://codehory.com/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="配置踩坑" scheme="http://yoursite.com/tags/%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/"/>
+      <category term="配置踩坑" scheme="http://codehory.com/tags/%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/"/>
     
-      <category term="Octomap" scheme="http://yoursite.com/tags/Octomap/"/>
+      <category term="Octomap" scheme="http://codehory.com/tags/Octomap/"/>
     
   </entry>
   
   <entry>
     <title>hexo+github博客搭建与备份教程（详细篇）</title>
-    <link href="http://yoursite.com/2019/07/25/%E7%8E%A9%E8%BD%AChexo/hexo+github%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%A4%87%E4%BB%BD%E6%95%99%E7%A8%8B%EF%BC%88%E8%AF%A6%E7%BB%86%E7%AF%87%EF%BC%89/"/>
-    <id>http://yoursite.com/2019/07/25/玩转hexo/hexo+github博客搭建与备份教程（详细篇）/</id>
+    <link href="http://codehory.com/2019/07/25/%E7%8E%A9%E8%BD%AChexo/hexo+github%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%A4%87%E4%BB%BD%E6%95%99%E7%A8%8B%EF%BC%88%E8%AF%A6%E7%BB%86%E7%AF%87%EF%BC%89/"/>
+    <id>http://codehory.com/2019/07/25/玩转hexo/hexo+github博客搭建与备份教程（详细篇）/</id>
     <published>2019-07-25T04:17:56.000Z</published>
     <updated>2019-09-30T09:44:56.000Z</updated>
     
@@ -162,17 +162,17 @@
     </summary>
     
     
-      <category term="玩转hexo" scheme="http://yoursite.com/categories/%E7%8E%A9%E8%BD%AChexo/"/>
+      <category term="玩转hexo" scheme="http://codehory.com/categories/%E7%8E%A9%E8%BD%AChexo/"/>
     
     
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+      <category term="hexo" scheme="http://codehory.com/tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>VS2017配置PCL1-9-1-for-win10(超详细)</title>
-    <link href="http://yoursite.com/2019/06/07/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/VS2017%E9%85%8D%E7%BD%AEPCL1-9-1-for-win10(%E8%B6%85%E8%AF%A6%E7%BB%86)/"/>
-    <id>http://yoursite.com/2019/06/07/环境配置/VS2017配置PCL1-9-1-for-win10(超详细)/</id>
+    <link href="http://codehory.com/2019/06/07/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/VS2017%E9%85%8D%E7%BD%AEPCL1-9-1-for-win10(%E8%B6%85%E8%AF%A6%E7%BB%86)/"/>
+    <id>http://codehory.com/2019/06/07/环境配置/VS2017配置PCL1-9-1-for-win10(超详细)/</id>
     <published>2019-06-07T13:27:45.000Z</published>
     <updated>2019-09-30T09:44:56.000Z</updated>
     
@@ -188,19 +188,19 @@
     </summary>
     
     
-      <category term="环境配置" scheme="http://yoursite.com/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+      <category term="环境配置" scheme="http://codehory.com/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="PCL" scheme="http://yoursite.com/tags/PCL/"/>
+      <category term="PCL" scheme="http://codehory.com/tags/PCL/"/>
     
-      <category term="配置踩坑" scheme="http://yoursite.com/tags/%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/"/>
+      <category term="配置踩坑" scheme="http://codehory.com/tags/%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/"/>
     
   </entry>
   
   <entry>
     <title>图像灰度化和二值化</title>
-    <link href="http://yoursite.com/2019/05/27/%E5%9B%BE%E5%83%8F%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%92%8C%E4%BA%8C%E5%80%BC%E5%8C%96/"/>
-    <id>http://yoursite.com/2019/05/27/图像视觉/图像灰度化和二值化/</id>
+    <link href="http://codehory.com/2019/05/27/%E5%9B%BE%E5%83%8F%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%92%8C%E4%BA%8C%E5%80%BC%E5%8C%96/"/>
+    <id>http://codehory.com/2019/05/27/图像视觉/图像灰度化和二值化/</id>
     <published>2019-05-27T15:56:28.000Z</published>
     <updated>2019-09-30T12:48:45.000Z</updated>
     
@@ -216,19 +216,19 @@
     </summary>
     
     
-      <category term="图像视觉" scheme="http://yoursite.com/categories/%E5%9B%BE%E5%83%8F%E8%A7%86%E8%A7%89/"/>
+      <category term="图像视觉" scheme="http://codehory.com/categories/%E5%9B%BE%E5%83%8F%E8%A7%86%E8%A7%89/"/>
     
     
-      <category term="图像处理" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+      <category term="图像处理" scheme="http://codehory.com/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
-      <category term="OpenCV" scheme="http://yoursite.com/tags/OpenCV/"/>
+      <category term="OpenCV" scheme="http://codehory.com/tags/OpenCV/"/>
     
   </entry>
   
   <entry>
     <title>Kinect-V2-For-Windows-开发（一）：SDK+VS20XX环境搭建</title>
-    <link href="http://yoursite.com/2019/05/21/Kinect%E5%BC%80%E5%8F%91/Kinect-V2-For-Windows-%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ASDK+VS20XX%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>http://yoursite.com/2019/05/21/Kinect开发/Kinect-V2-For-Windows-开发（一）：SDK+VS20XX环境搭建/</id>
+    <link href="http://codehory.com/2019/05/21/Kinect%E5%BC%80%E5%8F%91/Kinect-V2-For-Windows-%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ASDK+VS20XX%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>http://codehory.com/2019/05/21/Kinect开发/Kinect-V2-For-Windows-开发（一）：SDK+VS20XX环境搭建/</id>
     <published>2019-05-21T05:05:25.000Z</published>
     <updated>2019-09-30T10:15:30.000Z</updated>
     
@@ -241,19 +241,19 @@
     </summary>
     
     
-      <category term="Kinect开发" scheme="http://yoursite.com/categories/Kinect%E5%BC%80%E5%8F%91/"/>
+      <category term="Kinect开发" scheme="http://codehory.com/categories/Kinect%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Kinect" scheme="http://yoursite.com/tags/Kinect/"/>
+      <category term="Kinect" scheme="http://codehory.com/tags/Kinect/"/>
     
-      <category term="环境搭建" scheme="http://yoursite.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+      <category term="环境搭建" scheme="http://codehory.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     
   </entry>
   
   <entry>
     <title>点云法向量估计原理及应用PCL</title>
-    <link href="http://yoursite.com/2018/08/25/%E5%9B%BE%E5%83%8F%E8%A7%86%E8%A7%89/%E7%82%B9%E4%BA%91%E6%B3%95%E5%90%91%E9%87%8F%E4%BC%B0%E8%AE%A1%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8PCL/"/>
-    <id>http://yoursite.com/2018/08/25/图像视觉/点云法向量估计原理及应用PCL/</id>
+    <link href="http://codehory.com/2018/08/25/%E5%9B%BE%E5%83%8F%E8%A7%86%E8%A7%89/%E7%82%B9%E4%BA%91%E6%B3%95%E5%90%91%E9%87%8F%E4%BC%B0%E8%AE%A1%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8PCL/"/>
+    <id>http://codehory.com/2018/08/25/图像视觉/点云法向量估计原理及应用PCL/</id>
     <published>2018-08-24T16:31:57.000Z</published>
     <updated>2019-09-30T09:11:50.000Z</updated>
     
@@ -266,12 +266,12 @@
     </summary>
     
     
-      <category term="图像视觉" scheme="http://yoursite.com/categories/%E5%9B%BE%E5%83%8F%E8%A7%86%E8%A7%89/"/>
+      <category term="图像视觉" scheme="http://codehory.com/categories/%E5%9B%BE%E5%83%8F%E8%A7%86%E8%A7%89/"/>
     
     
-      <category term="点云" scheme="http://yoursite.com/tags/%E7%82%B9%E4%BA%91/"/>
+      <category term="点云" scheme="http://codehory.com/tags/%E7%82%B9%E4%BA%91/"/>
     
-      <category term="PCL" scheme="http://yoursite.com/tags/PCL/"/>
+      <category term="PCL" scheme="http://codehory.com/tags/PCL/"/>
     
   </entry>
   
